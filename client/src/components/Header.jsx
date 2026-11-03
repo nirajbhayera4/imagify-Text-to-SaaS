@@ -12,8 +12,8 @@ const Header = () => {
 
 
             <div className='flex flex-wrap justify-center mt-6 gap-3'>{Array(6).fill('').map((item, index) => (
-                <img className='rounded hover:scale-105 trasition-all duration-300 cursor-pointer max-sm:w-10' src={assets.sample_img_1} alt="" key={index } width={70}/>
-            ))}</div></div>
+                <img className='rounded hover:scale-105 trasition-all duration-300 cursor-pointer max-sm:w-10' src={index %2==0? assets.sample_img_2 : assets.sample_img_1} alt="" key={index } width={70}/>
+            ))}</div><p className='mt-2 text-neutral-600'>Generated images from imagify</p></div>
     )
 }
 
