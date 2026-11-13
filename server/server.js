@@ -1,21 +1,31 @@
-import connectDB from './config/mongodb.js';
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import userRouter from './routes/userRoutes.js';
-import bcrypt from "bcryptjs";
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import mongoose from "mongoose";
 
+import imageRouter from "./routes/imageRoutes.js"; // ✅ import your router
+import userRouter from "./routes/userRoutes.js";   // if you have user routes
 
 dotenv.config();
-const PORT = process.env.PORT || 4000;
 const app = express();
 
-app.use(express.json()); // all the requests will be in json format
+// Middlewares
 app.use(cors());
-await connectDB()
+app.use(express.json()); // ✅ parses JSON body
 
-app.use("/api/user",userRouter);
-app.get('/',(req,res)=>res.send("API working fine"));
+// Routes
+app.use("/api/image", imageRouter);  // ✅ hook image routes
+app.use("/api/user", userRouter);    // if exists
 
+// Root check
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
-app.listen(PORT,()=>console.log("Server is running on port "+PORT));
+// Server start
+const PORT = process.env.PORT || 4000;
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => console.error(err));
