@@ -1,0 +1,5 @@
+
+> server@1.0.0 start
+> node server.js
+
+[dotenv@17.2.2] injecting env (3) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
