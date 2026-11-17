@@ -73,7 +73,7 @@ Create a `.env` file in both the `client` and `server` directories and add the f
 ### Client (`client/.env`)
 
 ```
-VITE_API_URL=http://localhost:5000
+VITE_BACKEND_URL=http://localhost:4000
 ```
 
 ### Server (`server/.env`)
@@ -84,6 +84,8 @@ JWT_SECRET=<YOUR_JWT_SECRET>
 RAZORPAY_KEY_ID=<YOUR_RAZORPAY_KEY_ID>
 RAZORPAY_KEY_SECRET=<YOUR_RAZORPAY_KEY_SECRET>
 ```
+
+Credit plan prices are configured on the server and charged in INR. Applying credits uses a MongoDB transaction, so MongoDB must run as a replica set (MongoDB Atlas supports this).
 
 ## API Endpoints
 
@@ -99,8 +101,8 @@ RAZORPAY_KEY_SECRET=<YOUR_RAZORPAY_KEY_SECRET>
 
 ### Payment Routes
 
--   `POST /api/payments/create-order`: Create a Razorpay order.
--   `POST /api/payments/verify-payment`: Verify a Razorpay payment.
+-   `POST /api/payment/create-order`: Create a Razorpay order for a credit plan (requires the `token` header).
+-   `POST /api/payment/verify`: Verify a successful checkout and add credits (requires the `token` header).
 
 ## Folder Structure
 

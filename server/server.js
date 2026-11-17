@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import imageRouter from "./routes/imageRoutes.js"; // ✅ import your router
+import imageRouter from "./routes/ImageRoutes.js";
 import userRouter from "./routes/userRoutes.js";   // if you have user routes
+import paymentRouter from "./routes/paymentRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json()); // ✅ parses JSON body
 // Routes
 app.use("/api/image", imageRouter);  // ✅ hook image routes
 app.use("/api/user", userRouter);    // if exists
+app.use("/api/payment", paymentRouter);
 
 // Root check
 app.get("/", (req, res) => {
