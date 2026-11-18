@@ -87,6 +87,8 @@ RAZORPAY_KEY_SECRET=<YOUR_RAZORPAY_KEY_SECRET>
 
 Credit plan prices are configured on the server and charged in INR. Applying credits uses a MongoDB transaction, so MongoDB must run as a replica set (MongoDB Atlas supports this).
 
+Generated images and their prompts are stored in MongoDB and are available from the **History** link while signed in. Users can revisit, download, and delete their own images. Image records are stored separately from user records so image history does not enlarge user documents.
+
 ## API Endpoints
 
 ### User Routes
@@ -98,6 +100,9 @@ Credit plan prices are configured on the server and charged in INR. Applying cre
 ### Image Routes
 
 -   `POST /api/images/generate`: Generate an image from a text prompt.
+-   `GET /api/image/history`: List the signed-in user's generated images.
+-   `GET /api/image/history/:id`: Retrieve one of the signed-in user's images.
+-   `DELETE /api/image/history/:id`: Delete one of the signed-in user's images.
 
 ### Payment Routes
 

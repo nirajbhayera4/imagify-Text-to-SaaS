@@ -48,6 +48,20 @@ const AppContextProvider =  (props ) => {
         }
 
     }
+    const getGenerationHistory=async()=>{
+        const {data}=await axios.get(backendUrl + "/api/image/history",{headers:{token}});
+        if(!data.success) throw new Error(data.message || "Could not load image history");
+        return data.images;
+    }
+    const getGeneratedImage=async(id)=>{
+        const {data}=await axios.get(`${backendUrl}/api/image/history/${id}`,{headers:{token}});
+        if(!data.success) throw new Error(data.message || "Could not load image");
+        return data.image;
+    }
+    const deleteGeneratedImage=async(id)=>{
+        const {data}=await axios.delete(`${backendUrl}/api/image/history/${id}`,{headers:{token}});
+        if(!data.success) throw new Error(data.message || "Could not delete image");
+    }
 
     const logout=()=>{
         localStorage.removeItem("token");
@@ -62,7 +76,7 @@ const AppContextProvider =  (props ) => {
     },[token])
     
     const value={
-        user,setUser,showLogin,setShowLogin,backendUrl,token,setToken,credit,setCredit,loadCreditsData,logout,genrateImage
+        user,setUser,showLogin,setShowLogin,backendUrl,token,setToken,credit,setCredit,loadCreditsData,logout,genrateImage,getGenerationHistory,getGeneratedImage,deleteGeneratedImage
     }
 
 
