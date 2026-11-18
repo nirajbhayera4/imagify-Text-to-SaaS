@@ -8,6 +8,7 @@ import Result from "./pages/Result";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import History from "./pages/History";
 import { AppContext } from "./context/Appcontext"; // <-- Add this import
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/buy" element={<BuyCredits />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/history" element={<History />} />
       </Routes>
       <Footer />
     </div>

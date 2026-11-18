@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/icons/assets'
 import { motion } from "motion/react"
 import { AppContext } from '../context/Appcontext'
+import { useLocation } from 'react-router-dom'
 
 const Result = () => {
   const [image, setImage] = useState(assets.sample_img_1)
@@ -9,6 +10,15 @@ const Result = () => {
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState("")
   const { genrateImage } = useContext(AppContext) // <-- use correct function name
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.state?.image) {
+      setImage(location.state.image)
+      setInput(location.state.prompt || "")
+      setIsImageLoaded(true)
+    }
+  }, [location.state])
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
